@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 export interface Product {
   id: string;
   name: string;
+  description: string;
   price: number;
   image_url?: string;
 }
@@ -12,6 +13,7 @@ export interface Product {
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
   
   private api = 'http://localhost:8080';
@@ -20,5 +22,9 @@ export class ProductService {
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.api}/products`);
+  }
+
+  getProduct(id: string) {
+    return this.http.get<Product>(`${this.api}/products/${id}`)
   }
 }
