@@ -31,7 +31,9 @@
             <p class="text-sm text-gray-500 mt-1 truncate">{{ item.description }}</p>
             <div class="mt-3 flex items-center justify-between">
               <div class="text-lg font-bold">฿{{ item.price | number }}</div>
-              <button (click)="$event.stopPropagation()" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">Add</button>
+              <button (click)="$event.stopPropagation()" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
+                Add
+              </button>
             </div>
           </div>
         </div>

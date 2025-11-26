@@ -2,6 +2,7 @@ import { Component, signal, inject, afterNextRender } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { Product, ProductService } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -15,6 +16,7 @@ export class ProductsComponent {
 
   private productService = inject(ProductService);
   private router = inject(Router);
+  private cartService = inject(CartService);
 
   products = signal<Product[]>([]);
   loading = signal(true);
@@ -44,5 +46,9 @@ export class ProductsComponent {
 
   goToDetail(p: Product) {
     this.router.navigate(['products', p.id]);
+  }
+
+  add(product: Product) {
+    this.cartService.addToCart(product);
   }
 }

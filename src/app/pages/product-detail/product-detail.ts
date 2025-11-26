@@ -2,6 +2,7 @@ import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute} from '@angular/router';
 import { ProductService, Product} from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,6 +16,7 @@ export class ProductDetailComponent {
 
   private route = inject(ActivatedRoute);
   private ProductService = inject(ProductService);
+  private cartService = inject(CartService);
   
   product = signal<Product | null> (null);
 
@@ -27,6 +29,12 @@ export class ProductDetailComponent {
     this.ProductService.getProduct(id).subscribe((res) => {
       this.product.set(res);
     })
+  }
+
+  add() {
+    if (this.product()) {
+      this.cartService.addToCart(this.product()!);
+    }
   }
 
 }
